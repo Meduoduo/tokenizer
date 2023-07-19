@@ -1,0 +1,5 @@
+flask
+eventlet
+cryptography
+tiktoken
+Requests
