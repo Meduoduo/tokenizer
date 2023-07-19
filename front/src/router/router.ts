@@ -9,6 +9,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '/cost',
         component: () => import('../views/TokenizerCost.vue')
     },
+    {
+        path: '/',
+        redirect: '/cost'
+    }
 ]
 
 const router = createRouter({
