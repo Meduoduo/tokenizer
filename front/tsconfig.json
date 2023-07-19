@@ -15,6 +15,7 @@
       "jsx": "preserve",
       "types": [
         "naive-ui/volar",
+        "vite/client"
       ],
   
       /* Linting */

@@ -20,12 +20,7 @@
                             clearable
                             bordered
                             v-model:value="copyright"
-                            :options="copyrights.map(
-                                (item) => ({
-                                    label: item,
-                                    value: item
-                                })
-                            )"
+                            :options="copyrights"
                         />
                     </NGi>
                     <NGi>
@@ -35,7 +30,7 @@
                             clearable
                             bordered
                             v-model:value="model"
-                            :options="models[copyright].map(
+                            :options="get_copyright_models(copyright as keyof Copyright).map(
                                 (item: any) => ({
                                     label: item,
                                     value: item
@@ -168,7 +163,6 @@ import {
     NStatistic,
     NButton,
     NText,
-    NumberAnimationInst
 } from 'naive-ui'
 import { ref } from 'vue'
 import { api_token_cost } from '../interface/tokenizer'
@@ -186,10 +180,21 @@ const models = ref({
     ],
     'HuggingFace' : []
 })
-const copyrights = ref([
-    'OpenAI',
-    'HuggingFace'
-])
+interface Copyright {
+    OpenAI: string[],
+    HuggingFace: string[],
+}
+const get_copyright_models = (copyright: keyof Copyright)=> {
+    return models.value[copyright]
+}
+
+const copyrights = ref([{
+    'label': 'OpenAI',
+    'value': 'OpenAI'
+},{
+    'label': 'HuggingFace',
+    'value': 'HuggingFace'
+}])
 const prompts = ref(`[{
     "role": "system",
     "text": "You are a well performing token cost calculator. you should tell how much token I need to pay for a LLM prompt."
